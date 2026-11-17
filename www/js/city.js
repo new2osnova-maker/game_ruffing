@@ -80,8 +80,8 @@ function generateBlockBuildings(blockX, blockZ, blockSize, group, colors, roofMa
     
     // Расставляем по 4 здания на квартал с отступами
     const offsets = [
-        {-1, -1}, {1, -1},
-        {-1, 1}, {1, 1}
+        { x: -1, y: -1 }, { x: 1, y: -1 },
+        { x: -1, y: 1 }, { x: 1, y: 1 }
     ];
 
     offsets.forEach(offset => {
@@ -103,7 +103,7 @@ function generateBlockBuildings(blockX, blockZ, blockSize, group, colors, roofMa
         building.receiveShadow = true;
         group.add(building);
 
-        // Парапет / крыша здания (делает крышу объемной для руфинга)
+        // Парапет / крыша здания
         const roofGeo = new THREE.BoxGeometry(buildingSize + 0.6, 0.8, buildingSize + 0.6);
         const roof = new THREE.Mesh(roofGeo, roofMat);
         roof.position.set(posX, totalHeight + 0.4, posZ);
@@ -127,7 +127,7 @@ function createDetailedWindowsAndBalconies(x, height, z, size, floors, floorHeig
 
         // Делаем аккуратные оконные рамы по периметру этажа
         for (let i = -1; i <= 1; i += 1) {
-            if (i === 0) continue; // Пропускаем центр под подъездную группу на первом
+            if (i === 0) continue;
 
             // Сторона Z+
             const winBlock = createWinBlock(windowMat, glassMat);
